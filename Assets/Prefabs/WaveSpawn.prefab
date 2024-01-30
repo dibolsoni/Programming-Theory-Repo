@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 7906194250665957484}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.98, y: 0, z: 26.76}
+  m_LocalPosition: {x: 29.98, y: 1.1, z: 26.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45,6 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 5135295129606524416, guid: 5ffbf16711a40c344a8499cb5b74a2b2, type: 3}
-  timeBetweenWaves: 0
-  timeBetweenEnemies: 0
+  timeBetweenEnemies: 0.25
   waveNumber: 1
