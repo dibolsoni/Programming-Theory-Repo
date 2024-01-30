@@ -24,14 +24,19 @@ public class Enemy : MonoBehaviour
         {
             GetNextWaypoint();
         }
+
+        transform.Rotate(Vector3.forward * Time.deltaTime * speed);
     }
 
     private void GetNextWaypoint()
     {
         if ((waypointIndex + 1)  >= Waypoints.points.Length) {
+            Destroy(gameObject);
             return;
         }
         waypointIndex++;
         target = Waypoints.points[waypointIndex];
     }
+
+
 }
