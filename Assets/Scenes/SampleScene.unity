@@ -767,6 +767,10 @@ PrefabInstance:
       value: 0.2460022
       objectReference: {fileID: 0}
     - target: {fileID: 5907933837374329853, guid: 86f9c61889ff8d543be99c726a4ca80f, type: 3}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 4646808142798930594, guid: d5a2ead1bf3036a448ea4684bf4a27d3, type: 3}
+    - target: {fileID: 5907933837374329853, guid: 86f9c61889ff8d543be99c726a4ca80f, type: 3}
       propertyPath: spawnPosition
       value: 
       objectReference: {fileID: 440964137}
@@ -4398,5 +4402,4 @@ SceneRoots:
   - {fileID: 355415197}
   - {fileID: 1387630290}
   - {fileID: 56203040}
-  - {fileID: 8977293242723629599}
-
+  - {fileID: 424050022}
