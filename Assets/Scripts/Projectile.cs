@@ -6,6 +6,7 @@ public class Projectile : MonoBehaviour
 {
     public GameObject target;
     public float speed = 20f;
+
     public int damage = 50;
 
     void Update()
