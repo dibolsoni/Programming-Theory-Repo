@@ -14,7 +14,7 @@ public class WaveSpawn : MonoBehaviour
     void Start()
     {
         enemies = new List<GameObject>();
-        waveNumber = GameManager.Instance.waveNumber;
+        waveNumber = SpawnManager.Instance.WaveNumber;
         StartCoroutine(SpawnWave());
     }
 
