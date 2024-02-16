@@ -7,11 +7,13 @@ public class Projectile : MonoBehaviour
     public GameObject target;
     public float speed = 20f;
 
-    void LateUpdate()
+    public int damage = 50;
+
+    void Update()
     {
         if (target != null)
         {
-            MoveToTarget(target);
+            MoveToTarget();
         }
 
     }
@@ -19,17 +21,26 @@ public class Projectile : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
+        {
+            HitTarget();
             Destroy(gameObject);
+        }
     }
 
-    public void MoveToTarget(GameObject newTarget)
+    public void MoveToTarget()
     {
             Vector3 direction = target.transform.position - transform.position;
-            transform.Translate(direction.normalized * Time.deltaTime * speed);
+            transform.Translate(speed * Time.deltaTime * direction.normalized, Space.World);
     }
 
     public void SetNewTarget(GameObject newTarget)
     {
         target = newTarget;
+    }
+
+    private void HitTarget()
+    {
+        Enemy enemy = target.GetComponent<Enemy>();
+        enemy.Hit(damage);
     }
 }

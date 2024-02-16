@@ -7,10 +7,19 @@ using UnityEngine.AI;
 public class Tower : MonoBehaviour
 {
     [SerializeField]
-    static GameObject target;
-    public GameObject canoon;
-    public float range = 10;
+    private Canoon canoon;
+    private float lastFire = 0;
     private bool isTargetInRange = false;
+
+    public GameObject target { get; private set; }
+    public float range = 10;
+    public float cooldown = 0.5f;
+
+
+    private void Start()
+    {
+        canoon = GetComponentInChildren<Canoon>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -38,29 +47,30 @@ public class Tower : MonoBehaviour
         if (target == null || !isTargetInRange)
         {
             FindNewTarget();
-            ResetCanoon();
+            canoon.Reset();
         }
         else
         {
-            CanoonLookAt(target.transform.position);
+            Fire();
+            canoon.Look(target);
         }
 
     }
 
-    private void ResetCanoon()
+    private void Fire()
     {
-        canoon.transform.rotation = transform.rotation;
+        if (Time.time > lastFire + cooldown)
+        {
+            lastFire = Time.time;
+            canoon.Fire(target);
+        }
     }
 
-    private void CanoonLookAt(Vector3 pos)
-    {
-        canoon.transform.LookAt(pos);
-    }
 
 
     public void FindNewTarget()
     {
-        var enemies = FindObjectsByType<Enemy>(FindObjectsSortMode.None);
+        var enemies = FindObjectsByType<Enemy>(FindObjectsSortMode.InstanceID);
         foreach (var enemy in enemies)
         {
             if (Vector3.Distance(transform.position, enemy.transform.position) <= range)
