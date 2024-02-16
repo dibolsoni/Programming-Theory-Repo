@@ -5,9 +5,11 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    protected GameManager gameManager;
     public float speed = 10f;
     private Transform target;
     private int waypointIndex = 0;
+    public int health = 100;
 
     // Start is called before the first frame update
     void Start()
@@ -38,5 +40,13 @@ public class Enemy : MonoBehaviour
         target = Waypoints.points[waypointIndex];
     }
 
+    public void Hit(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 
 }
