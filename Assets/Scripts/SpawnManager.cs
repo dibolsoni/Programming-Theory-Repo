@@ -7,10 +7,9 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     public static SpawnManager Instance;
-    public int totalWaveNumber = 20;
     public float timeBetweenWaves = 20f;
-    public GameObject waveSpawn;
     private float nextWaveTime;
+    public GameObject waveSpawn;
     private List<GameObject> waves;
 
     public int WaveNumber { get { return waves.Count; }  }
@@ -57,7 +56,7 @@ public class SpawnManager : MonoBehaviour
     void NextWave()
     {
         waves.Add(Instantiate(waveSpawn));
-        GameManager.Instance.waveNumber = WaveNumber;
+        GameManager.Instance.NextWave();
         nextWaveTime = timeBetweenWaves + Time.time;
     }
 }
