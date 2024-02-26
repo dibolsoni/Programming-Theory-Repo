@@ -6,11 +6,23 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public int totalWaveNumber = 20;
+    public static SpawnManager Instance;
     public float timeBetweenWaves = 20f;
-    public GameObject waveSpawn;
     private float nextWaveTime;
+    public GameObject waveSpawn;
     private List<GameObject> waves;
+
+    public int WaveNumber { get { return waves.Count; }  }
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -44,7 +56,7 @@ public class SpawnManager : MonoBehaviour
     void NextWave()
     {
         waves.Add(Instantiate(waveSpawn));
-        GameManager.Instance.waveNumber = waves.Count;
+        GameManager.Instance.NextWave();
         nextWaveTime = timeBetweenWaves + Time.time;
     }
 }

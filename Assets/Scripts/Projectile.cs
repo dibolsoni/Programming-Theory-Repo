@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public GameObject target;
+    [SerializeField]
+    private GameObject target;
     public float speed = 20f;
-
     public int damage = 50;
 
     void Update()
@@ -23,7 +23,6 @@ public class Projectile : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             HitTarget();
-            Destroy(gameObject);
         }
     }
 
@@ -40,6 +39,7 @@ public class Projectile : MonoBehaviour
 
     private void HitTarget()
     {
+        Destroy(gameObject);
         Enemy enemy = target.GetComponent<Enemy>();
         enemy.Hit(damage);
     }

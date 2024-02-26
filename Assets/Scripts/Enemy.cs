@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    protected GameManager gameManager;
     public float speed = 10f;
     private Transform target;
     private int waypointIndex = 0;
     public int health = 100;
+    public int goldValue = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +32,9 @@ public class Enemy : MonoBehaviour
 
     private void GetNextWaypoint()
     {
-        if ((waypointIndex + 1)  >= Waypoints.points.Length) {
+        if ((waypointIndex + 1) >= Waypoints.points.Length)
+        {
+            GameManager.Instance.removeLife();
             Destroy(gameObject);
             return;
         }
@@ -46,6 +48,7 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
+            GameManager.Instance.AddGold(goldValue);
         }
     }
 
