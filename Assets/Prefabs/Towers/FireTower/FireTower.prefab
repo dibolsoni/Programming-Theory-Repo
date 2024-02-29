@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7603115402290782337}
   - component: {fileID: 7504404879614491591}
   m_Layer: 0
-  m_Name: Tower
+  m_Name: FireTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,9 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaefb57e8db02c74fa1a391a20fd9a54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canoon: {fileID: 5907933837374329853}
   range: 10
-  cooldown: 0.5
+  cooldown: 1
 --- !u!1 &2909303087540786652
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,7 +165,7 @@ GameObject:
   - component: {fileID: 4929522404908204850}
   - component: {fileID: 330001220279289786}
   - component: {fileID: 802050580586040581}
-  - component: {fileID: 5907933837374329853}
+  - component: {fileID: 6850360035216081077}
   m_Layer: 0
   m_Name: Canoon
   m_TagString: Untagged
@@ -182,7 +181,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6613301862750397095}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: 0.82484204, z: -0, w: -0.5653633}
   m_LocalPosition: {x: 0.03, y: 3.06, z: -0.07}
   m_LocalScale: {x: 1.9366301, y: 1.0384201, z: 2.4541185}
   m_ConstrainProportionsScale: 0
@@ -219,7 +218,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 29a3d3674e7039449a9c9ac803006c08, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -262,7 +261,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5907933837374329853
+--- !u!114 &6850360035216081077
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -274,9 +273,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3826184957666e42a431325b88da97a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 4646808142798930594, guid: d5a2ead1bf3036a448ea4684bf4a27d3, type: 3}
-  spawnPosition: {fileID: 7497462109152210253}
-  turnSpeed: 10
+  projectile: {fileID: 4646808142798930594, guid: dc8f6cb9448633b49ba160a98fee7123, type: 3}
+  turnSpeed: 50
 --- !u!1 &7468750209129164990
 GameObject:
   m_ObjectHideFlags: 0

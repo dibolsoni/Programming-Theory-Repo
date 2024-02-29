@@ -6,19 +6,18 @@ using UnityEngine.AI;
 
 public class Tower : MonoBehaviour
 {
-    [SerializeField]
     private Canoon canoon;
-    private float lastFire = 0;
     private bool isTargetInRange = false;
-
-    public GameObject target { get; private set; }
+    private GameObject target;
+    private float lastFire;
     public float range = 10;
-    public float cooldown = 0.5f;
+    public float cooldown = 1f;
 
 
     private void Start()
     {
         canoon = GetComponentInChildren<Canoon>();
+        lastFire = Time.time - cooldown;
     }
 
     // Update is called once per frame
@@ -59,7 +58,8 @@ public class Tower : MonoBehaviour
 
     private void Fire()
     {
-        if (Time.time > lastFire + cooldown)
+        float elapsedTime = Time.time - lastFire;
+        if (elapsedTime > cooldown)
         {
             lastFire = Time.time;
             canoon.Fire(target);

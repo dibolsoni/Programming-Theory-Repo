@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,14 +6,17 @@ using UnityEngine.Rendering;
 
 public class Canoon : MonoBehaviour
 {
+    private GameObject spawnProjectile;
     public GameObject projectile;
-    public GameObject spawnPosition;
-
     public float turnSpeed = 50f;
 
+    private void Start()
+    {
+        spawnProjectile = transform.Find("SpawnProjectile").gameObject;
+    }
 
-
-    public void Look(GameObject target) {
+    public void Look(GameObject target)
+    {
         transform.rotation = LerpRotation(target.transform.position);
     }
 
@@ -31,7 +35,7 @@ public class Canoon : MonoBehaviour
 
     public void Fire(GameObject target)
     {
-        Projectile p = Instantiate(projectile, spawnPosition.transform.position, transform.rotation).GetComponent<Projectile>();
+        var p = Instantiate(projectile, spawnProjectile.transform.position, transform.rotation).GetComponent<BaseProjectile>();
         p.SetNewTarget(target);
     }
 }
