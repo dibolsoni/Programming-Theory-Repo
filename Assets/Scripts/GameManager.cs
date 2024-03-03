@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public int waveNumber = 0;
     public int lifeRemaining = 20;
-    public int goldAmount = 0;
+    public int goldAmount = 10;
     public int time = 0;
     public int timePerWave = 20;
 
@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
         time = timePerWave;
     }
 
-    public void AddGold(int gold)
+    public void changeGold(int gold)
     {
         this.goldAmount += gold;
     }

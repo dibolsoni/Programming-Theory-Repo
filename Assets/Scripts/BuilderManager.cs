@@ -55,10 +55,20 @@ public class BuilderManager : MonoBehaviour
         towerToBuild = coldTowerPrefab;
     }
 
+    public bool CanBuild()
+    {
+        return towerToBuild is not null && towerToBuild.cost <= GameManager.Instance.goldAmount;
+    }
+
 
     // ENCAPSULATION
     public void OnBuild()
     {
+        if (!CanBuild())
+        {
+            NotificationManager.Instance.ShowNotification("Not enough gold");
+            return;
+        }
         node.BuildTower(towerToBuild);
         Close();
     }

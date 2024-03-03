@@ -57,10 +57,11 @@ public class Node : MonoBehaviour
     {
         if (this.tower != null)
         {
-            Debug.Log("Can't build there");
+            NotificationManager.Instance.ShowNotification("Can't build here");
             return;
         }
         this.tower = Instantiate(tower, transform.position, Quaternion.identity);
+        GameManager.Instance.changeGold(-tower.cost);
         Reset();
     }
 }

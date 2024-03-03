@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaefb57e8db02c74fa1a391a20fd9a54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cost: 40
   range: 10
   cooldown: 1
 --- !u!1 &2909303087540786652

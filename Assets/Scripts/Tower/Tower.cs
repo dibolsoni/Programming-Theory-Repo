@@ -7,7 +7,15 @@ using UnityEngine.AI;
 public class Tower : MonoBehaviour
 {
     private Canoon canoon;
-    private bool isTargetInRange = false;
+    public int cost;
+
+    private bool isTargetInRange
+    {
+        get
+        {
+            return target is not null && Vector3.Distance(target.transform.position, transform.position) <= range;
+        }
+    }
     private GameObject target;
     private float lastFire;
     public float range = 10;
@@ -18,27 +26,6 @@ public class Tower : MonoBehaviour
     {
         canoon = GetComponentInChildren<Canoon>();
         lastFire = Time.time - cooldown;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (target)
-        {
-            if (target.IsDestroyed())
-            {
-                target = null;
-            }
-
-            if (Vector3.Distance(target.transform.position, transform.position) > range)
-            {
-                isTargetInRange = false;
-            }
-            else
-            {
-                isTargetInRange = true;
-            }
-        }
     }
 
     private void LateUpdate()

@@ -10,6 +10,7 @@ public class ColdProjectile : BaseProjectile
     public override int damage => 25;
     // POLYMORPHISM
     public override float speed => 15f;
+
     // POLYMORPHISM
     protected override void AfterHit(Enemy enemy)
     {
