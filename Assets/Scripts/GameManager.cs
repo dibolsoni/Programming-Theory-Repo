@@ -2,15 +2,32 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public int waveNumber = 0;
-    public int lifeRemaining = 20;
-    public int goldAmount = 10;
-    public int time = 0;
+    public int waveNumber
+    {
+        get
+        {
+            return SpawnManager.Instance.WaveNumber;
+        }
+    }
+
+    public int startLife = 20;
+    
+    // ENCAPLUSATION
+    public int lifeRemaining { get; private set;}
+
+    public int startGold = 10;
+    // ENCAPLUSATION
+    public int goldAmount { get; private set; }
+
+    public int time;
     public int timePerWave = 20;
+
+    public bool isGameOver = false;
 
     private void Awake()
     {
@@ -20,10 +37,15 @@ public class GameManager : MonoBehaviour
             return;
         }
         Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
+        lifeRemaining = startLife;
+        goldAmount = startGold;
+        time = 0;
+        isGameOver = false;
         time = timePerWave;
         StartCoroutine(Time());
     }
@@ -47,7 +69,6 @@ public class GameManager : MonoBehaviour
 
     public void NextWave()
     {
-        waveNumber++;
         time = timePerWave;
     }
 
@@ -65,6 +86,8 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        isGameOver = true;
         Debug.Log("Game Over");
+        SceneManager.LoadScene("Menu");
     }
 }

@@ -10,17 +10,16 @@ public class BuilderManager : MonoBehaviour
     public Tower basicTowerPrefab;
     public Tower fireTowerPrefab;
     public Tower coldTowerPrefab;
-    [SerializeField]
     private Tower towerToBuild;
     public GameObject BuilderUI;
 
 
     // ENCAPSULATION
-    public bool isBuilderUIActive
+    public bool hasNode
     {
         get
         {
-            return node is not null;
+            return node != null;
         }
     }
 

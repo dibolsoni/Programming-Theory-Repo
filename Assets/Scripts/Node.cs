@@ -20,7 +20,7 @@ public class Node : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (BuilderManager.Instance.isBuilderUIActive)
+        if (BuilderManager.Instance.hasNode)
             return;
         // instance of the tower prefab
         Highlight();
