@@ -11,9 +11,10 @@ public class Enemy : MonoBehaviour
     private float minSpeed = 5f;
 
     // ENCAPSULATION
-    public float speed { 
-        get { return _speed; } 
-        set { _speed = Math.Max(minSpeed, value); } 
+    public float speed
+    {
+        get { return _speed; }
+        set { _speed = Math.Max(minSpeed, value); }
     }
     private Transform target;
     private int waypointIndex = 0;
@@ -27,6 +28,12 @@ public class Enemy : MonoBehaviour
         originalSpeed = speed;
         originalColor = GetComponent<Renderer>().material.color;
         target = Waypoints.points[waypointIndex];
+        IncrementHealth(GameManager.Instance.waveNumber);
+    }
+
+    void IncrementHealth(int waveNumber)
+    {
+        health += waveNumber * 10;
     }
 
     // Update is called once per frame
@@ -86,13 +93,13 @@ public class Enemy : MonoBehaviour
     {
         int numberOfTicks = 3;
         MixColor(Color.yellow);
-        for (int i = 0; i < numberOfTicks; i++) 
-        { 
+        for (int i = 0; i < numberOfTicks; i++)
+        {
             Hit(damage / numberOfTicks);
             yield return new WaitForSeconds(1);
         }
         GetComponent<Renderer>().material.color = originalColor;
-    }   
+    }
 
     public void Burn(int damage = 5)
     {

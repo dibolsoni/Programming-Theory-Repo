@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
@@ -14,20 +16,14 @@ public class GameManager : MonoBehaviour
             return SpawnManager.Instance.WaveNumber;
         }
     }
-
     public int startLife = 20;
-    
-    // ENCAPLUSATION
-    public int lifeRemaining { get; private set;}
-
     public int startGold = 10;
-    // ENCAPLUSATION
-    public int goldAmount { get; private set; }
-
     public int time;
     public int timePerWave = 20;
-
     public bool isGameOver = false;
+    // ENCAPSULATION
+    public PlayerManager playerState { get { return PlayerManager.Instance; } }
+
 
     private void Awake()
     {
@@ -42,13 +38,16 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        lifeRemaining = startLife;
-        goldAmount = startGold;
-        time = 0;
+        Reset();
+    }
+
+    public void Reset()
+    {
         isGameOver = false;
         time = timePerWave;
         StartCoroutine(Time());
     }
+
 
     IEnumerator Time()
     {
@@ -74,20 +73,37 @@ public class GameManager : MonoBehaviour
 
     public void changeGold(int gold)
     {
-        this.goldAmount += gold;
+        if (gold < 0)
+        {
+            playerState.decreaseGold(gold);
+        }
+        else
+        {
+            playerState.increaseGold(gold);
+        }
     }
 
     public void removeLife(int life = 1)
     {
-        this.lifeRemaining -= life;
-        if (lifeRemaining <= 0)
+        playerState.decreaseLife(life);
+        valitateGameOver();
+    }
+
+    public void valitateGameOver()
+    {
+
+        if (isGameOver || playerState.lifeRemaining <= 0)
+        {
             GameOver();
+        }
     }
 
     public void GameOver()
     {
         isGameOver = true;
+        StopAllCoroutines();
         Debug.Log("Game Over");
+        PlayerManager.Instance.bestScore = waveNumber;
         SceneManager.LoadScene("Menu");
     }
 }

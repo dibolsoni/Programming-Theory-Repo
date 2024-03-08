@@ -31,12 +31,12 @@ public class UI : MonoBehaviour
 
     private void LateUpdate()
     {
-        var gameState = GameManager.Instance;
+        GameManager gameState = GameManager.Instance;
+        PlayerManager playerState = PlayerManager.Instance;
         UpdateWaveNumber(gameState.waveNumber);
-        UpdateGoldAmount(gameState.goldAmount);
-        UpdateLife(gameState.lifeRemaining);
         UpdateTimer(gameState.time);  
-
+        UpdateGoldAmount(playerState.goldAmount);
+        UpdateLife(playerState.lifeRemaining);
     }
 
     private void UpdateWaveNumber(int wnumber)

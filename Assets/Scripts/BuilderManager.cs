@@ -56,7 +56,7 @@ public class BuilderManager : MonoBehaviour
 
     public bool CanBuild()
     {
-        return towerToBuild is not null && towerToBuild.cost <= GameManager.Instance.goldAmount;
+        return towerToBuild is not null && towerToBuild.cost <= GameManager.Instance.playerState.goldAmount;
     }
 
 
