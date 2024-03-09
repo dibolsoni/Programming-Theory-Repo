@@ -71,17 +71,15 @@ public class GameManager : MonoBehaviour
         time = timePerWave;
     }
 
-    public void changeGold(int gold)
+    public void removeGold(int gold)
     {
-        if (gold < 0)
-        {
-            playerState.decreaseGold(gold);
-        }
-        else
-        {
-            playerState.increaseGold(gold);
-        }
+        playerState.decreaseGold(gold);
     }
+
+    public void addGold(int gold)
+    {
+        playerState.increaseGold(gold);
+    }   
 
     public void removeLife(int life = 1)
     {

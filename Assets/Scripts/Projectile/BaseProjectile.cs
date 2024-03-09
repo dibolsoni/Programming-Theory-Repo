@@ -6,19 +6,20 @@ public abstract class BaseProjectile : MonoBehaviour
 {
     protected GameObject target;
     // POLYMORPHISM
-    public abstract float speed { get; } 
+    public abstract float speed { get; }
     // POLYMORPHISM
     public abstract int damage { get; }
 
     // POLYMORPHISM
     protected abstract void AfterHit(Enemy enemy);
 
-    void Update()
+    private void FixedUpdate() 
     {
         if (target != null)
         {
             MoveToTarget();
-        } else
+        }
+        else
         {
             Destroy(gameObject);
         }

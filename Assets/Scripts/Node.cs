@@ -10,6 +10,7 @@ public class Node : MonoBehaviour
     private Renderer rend;
     private bool isHightLighted = false;
     private Tower tower;
+    public Vector3 positionOffset;
 
     private void Start()
     {
@@ -60,8 +61,8 @@ public class Node : MonoBehaviour
             NotificationManager.Instance.ShowNotification("Can't build here");
             return;
         }
-        this.tower = Instantiate(tower, transform.position, Quaternion.identity);
-        GameManager.Instance.changeGold(-tower.cost);
+        this.tower = Instantiate(tower, transform.position + positionOffset, Quaternion.identity);
+        GameManager.Instance.removeGold(tower.cost);
         Reset();
     }
 }

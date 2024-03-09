@@ -67,7 +67,7 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
-            GameManager.Instance.changeGold(goldValue);
+            GameManager.Instance.addGold(goldValue);
         }
     }
 

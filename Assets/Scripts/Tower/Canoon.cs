@@ -6,14 +6,10 @@ using UnityEngine.Rendering;
 
 public class Canoon : MonoBehaviour
 {
-    private GameObject spawnProjectile;
+    public GameObject spawnProjectile;
     public GameObject projectile;
     public float turnSpeed = 50f;
 
-    private void Start()
-    {
-        spawnProjectile = transform.Find("SpawnProjectile").gameObject;
-    }
 
     public void Look(GameObject target)
     {

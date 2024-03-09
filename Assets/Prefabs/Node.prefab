@@ -118,3 +118,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a5c3d45a910e2345b0bf078b70f22be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  positionOffset: {x: 0, y: 3, z: 0}
