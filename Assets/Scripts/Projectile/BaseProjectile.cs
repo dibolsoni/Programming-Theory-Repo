@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class BaseProjectile : MonoBehaviour
 {
-    protected GameObject target;
+    protected Enemy target;
     // POLYMORPHISM
     public abstract float speed { get; }
     // POLYMORPHISM
@@ -36,11 +36,13 @@ public abstract class BaseProjectile : MonoBehaviour
 
     public void MoveToTarget()
     {
-        Vector3 direction = target.transform.position - transform.position;
+        Vector3 targetOffset = new Vector3(0, 2.5f, 0);
+        Vector3 targetPosition = target.transform.position + targetOffset;
+        Vector3 direction = targetPosition - transform.position;
         transform.Translate(speed * Time.deltaTime * direction.normalized, Space.World);
     }
 
-    public void SetNewTarget(GameObject newTarget)
+    public void SetNewTarget(Enemy newTarget)
     {
         target = newTarget;
     }

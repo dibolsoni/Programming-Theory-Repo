@@ -16,7 +16,7 @@ public class Tower : MonoBehaviour
             return target is not null && Vector3.Distance(target.transform.position, transform.position) <= range;
         }
     }
-    private GameObject target;
+    private Enemy target;
     private float lastFire;
     public float range = 10;
     public float cooldown = 1f;
@@ -38,7 +38,7 @@ public class Tower : MonoBehaviour
         else
         {
             Fire();
-            canoon.Look(target);
+            canoon.Look(target.gameObject);
         }
 
     }
@@ -62,7 +62,7 @@ public class Tower : MonoBehaviour
         {
             if (Vector3.Distance(transform.position, enemy.transform.position) <= range)
             {
-                target = enemy.gameObject;
+                target = enemy;
                 break;
             }
         }

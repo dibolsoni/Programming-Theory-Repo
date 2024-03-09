@@ -17,14 +17,18 @@ public class Enemy : MonoBehaviour
         set { _speed = Math.Max(minSpeed, value); }
     }
     private Transform target;
+    public Vector3 enemyTargetablePoint { get { return target.position + new Vector3(0, 2.5f, 0); } }
     private int waypointIndex = 0;
     public int health = 100;
     public int goldValue = 10;
+    private float turnSpeed = 10f;
     private Color originalColor;
+    private GameObject ghoul;
 
     // Start is called before the first frame update
     void Start()
     {
+        ghoul = transform.GetChild(0).gameObject;
         originalSpeed = speed;
         originalColor = GetComponent<Renderer>().material.color;
         target = Waypoints.points[waypointIndex];
@@ -39,14 +43,41 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 direction = target.position - transform.position;
-        transform.Translate(direction.normalized * speed * Time.deltaTime, Space.World);
         if (Vector3.Distance(transform.position, target.position) <= 0.2f)
         {
             GetNextWaypoint();
         }
+        MoveToWayPoint();
+        LookToWaypoint();
+        PlayAnimation();
+    }
 
-        transform.Rotate(Vector3.forward * Time.deltaTime * speed);
+    public void PlayAnimation()
+    {
+        if (target)
+        {
+            if (speed > minSpeed)
+                ghoul.GetComponent<Animation>().Play("Run");
+            else if (speed == minSpeed)
+                ghoul.GetComponent<Animation>().Play("Walk");
+            else
+                ghoul.GetComponent<Animation>().Play("Idle");
+        }
+    }
+
+    public void MoveToWayPoint()
+    {
+
+        Vector3 direction = target.position - transform.position;
+        transform.Translate(direction.normalized * speed * Time.deltaTime, Space.World);
+    }
+
+    public void LookToWaypoint()
+    {
+        Vector3 direction = target.position - transform.position;
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        Vector3 rotation = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
+        transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
     }
 
     private void GetNextWaypoint()

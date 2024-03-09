@@ -29,7 +29,7 @@ public class Canoon : MonoBehaviour
         transform.rotation = LerpRotation(Quaternion.identity.eulerAngles);
     }
 
-    public void Fire(GameObject target)
+    public void Fire(Enemy target)
     {
         var p = Instantiate(projectile, spawnProjectile.transform.position, transform.rotation).GetComponent<BaseProjectile>();
         p.SetNewTarget(target);
