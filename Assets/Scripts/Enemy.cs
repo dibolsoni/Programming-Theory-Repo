@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private float originalSpeed;
+    public float originalSpeed;
     public float _speed = 10f;
     private float minSpeed = 5f;
 
@@ -22,17 +24,23 @@ public class Enemy : MonoBehaviour
     public int health = 100;
     public int goldValue = 10;
     private float turnSpeed = 10f;
-    private Color originalColor;
+
     private GameObject ghoul;
+    private BurnEffect burnEffect;
+    private SlowEffect slowEffect;
+    public List<Effect> effects;
+
 
     // Start is called before the first frame update
     void Start()
     {
         ghoul = transform.GetChild(0).gameObject;
         originalSpeed = speed;
-        originalColor = GetComponent<Renderer>().material.color;
         target = Waypoints.points[waypointIndex];
         IncrementHealth(GameManager.Instance.waveNumber);
+        effects = new List<Effect>();
+        burnEffect = GetComponent<BurnEffect>();
+        slowEffect = GetComponent<SlowEffect>();
     }
 
     void IncrementHealth(int waveNumber)
@@ -102,44 +110,30 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    IEnumerator SlowRoutine(float power = 5f)
-    {
-        int numberOfTicks = 3;
-        speed -= power;
-        MixColor(Color.blue);
-        for (int i = 0; i < numberOfTicks; i++)
-        {
-            yield return new WaitForSeconds(1);
-        }
-        speed = originalSpeed;
-        GetComponent<Renderer>().material.color = originalColor;
-    }
-
     public void Slow(float power = 5f)
     {
-        StartCoroutine(SlowRoutine(power));
+        if (effects.Any(e => e is SlowEffect))
+        {
+            var slow = (SlowEffect)effects.First(e => e is SlowEffect);
+            slow.duration = 3;
+        }
+        else
+        {
+            effects.Add(slowEffect.StartSlow(this, power));
+        }
     }
 
-    IEnumerator BurnRoutine(int damage)
-    {
-        int numberOfTicks = 3;
-        MixColor(Color.yellow);
-        for (int i = 0; i < numberOfTicks; i++)
-        {
-            Hit(damage / numberOfTicks);
-            yield return new WaitForSeconds(1);
-        }
-        GetComponent<Renderer>().material.color = originalColor;
-    }
 
     public void Burn(int damage = 5)
     {
-        StartCoroutine(BurnRoutine(damage));
-    }
-
-    public void MixColor(Color color)
-    {
-        var _color = GetComponent<Renderer>().material.color;
-        GetComponent<Renderer>().material.color = Color.Lerp(_color, color, 0.5f);
+        if (effects.Any(e => e is BurnEffect))
+        {
+            var burn = (BurnEffect)effects.First(e => e is BurnEffect);
+            burn.duration = 3;
+        }
+        else
+        {
+            effects.Add(burnEffect.StartBurn(this, damage));
+        }
     }
 }

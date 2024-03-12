@@ -9,11 +9,10 @@ public abstract class BaseProjectile : MonoBehaviour
     public abstract float speed { get; }
     // POLYMORPHISM
     public abstract int damage { get; }
-
     // POLYMORPHISM
     protected abstract void AfterHit(Enemy enemy);
 
-    private void FixedUpdate() 
+    private void FixedUpdate()
     {
         if (target != null)
         {
