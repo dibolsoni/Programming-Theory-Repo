@@ -21,7 +21,8 @@ public class Enemy : MonoBehaviour
     private Transform target;
     public Vector3 enemyTargetablePoint { get { return target.position + new Vector3(0, 2.5f, 0); } }
     private int waypointIndex = 0;
-    public int health = 100;
+    public int maxHealth = 100;
+    public int health;
     public int goldValue = 10;
     private float turnSpeed = 10f;
 
@@ -31,21 +32,26 @@ public class Enemy : MonoBehaviour
     public List<Effect> effects;
 
 
+    private void Awake()
+    {
+        IncrementHealth();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         ghoul = transform.GetChild(0).gameObject;
         originalSpeed = speed;
         target = Waypoints.points[waypointIndex];
-        IncrementHealth(GameManager.Instance.waveNumber);
         effects = new List<Effect>();
         burnEffect = GetComponent<BurnEffect>();
         slowEffect = GetComponent<SlowEffect>();
+        health = maxHealth;
     }
 
-    void IncrementHealth(int waveNumber)
+    void IncrementHealth()
     {
-        health += waveNumber * 10;
+        maxHealth += SpawnManager.Instance.WaveNumber * 10;
     }
 
     // Update is called once per frame
