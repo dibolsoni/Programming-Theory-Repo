@@ -6,12 +6,11 @@ using UnityEngine;
 // INHERITANCE
 public class ColdProjectile : BaseProjectile
 {
-    // POLYMORPHISM
+    // ABSTRACTION
     public override int damage => 25;
-    // POLYMORPHISM
+    // ABSTRACTION
     public override float speed => 15f;
-
-    // POLYMORPHISM
+    // ABSTRACTION
     protected override void AfterHit(Enemy enemy)
     {
         enemy.Slow();

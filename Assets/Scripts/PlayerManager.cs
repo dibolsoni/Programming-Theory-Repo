@@ -11,9 +11,6 @@ public class PlayerManager : MonoBehaviour
     public int lifeRemaining { get; private set; }
     // ENCAPLUSATION
     public int goldAmount { get; private set; }
-    // ENCAPLUSATION
-    public string playerName { get; private set; }
-
     private int _bestScore = 0;
     // ENCAPLUSATION
     public int bestScore
@@ -27,6 +24,8 @@ public class PlayerManager : MonoBehaviour
             }
         }
     }
+    // ENCAPLUSATION
+    public string playerName { get; private set; }
 
     private void Awake()
     {

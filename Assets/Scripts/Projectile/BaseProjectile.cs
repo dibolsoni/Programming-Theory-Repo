@@ -5,11 +5,11 @@ using UnityEngine;
 public abstract class BaseProjectile : MonoBehaviour
 {
     protected Enemy target;
-    // POLYMORPHISM
+    // ABSTRACTION
     public abstract float speed { get; }
-    // POLYMORPHISM
+    // ABSTRACTION
     public abstract int damage { get; }
-    // POLYMORPHISM
+    // ABSRACTION
     protected abstract void AfterHit(Enemy enemy);
 
     private void FixedUpdate()

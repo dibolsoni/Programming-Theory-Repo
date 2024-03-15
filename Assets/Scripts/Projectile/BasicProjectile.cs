@@ -5,12 +5,12 @@ using UnityEngine;
 // INHERITANCE
 public class BasicProjectile : BaseProjectile
 {
-    // POLYMORPHISM
+    // ABSTRACTION
     public override int damage => 50;
-    // POLYMORPHISM
+    // ABSTRACTION
     public override float speed => 20f;
 
-    // POLYMORPHISM
+    // ABSTRACTION
     protected override void AfterHit(Enemy enemy)
     {
         // Do nothing

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class Effect : MonoBehaviour
 {
+    // ABSTRACTION
     public abstract Enemy target { get; protected set; }
     public ParticleSystem particlePrefab;
     private int _duration = 3;
@@ -23,9 +24,9 @@ public abstract class Effect : MonoBehaviour
         }
     }
 
-    // POLYMORPHISM
+    // ABSTRACTION
     abstract protected IEnumerator EffectRoutine();
-    // POLYMORPHISM
+    
     public void StartEffect()
     {
         particlePrefab.Play();

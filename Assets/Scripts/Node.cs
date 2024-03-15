@@ -9,7 +9,8 @@ public class Node : MonoBehaviour
     private Color hightLightColor;
     private Renderer rend;
     private bool isHightLighted = false;
-    private Tower tower;
+    // ENCAPSULATION
+    public Tower tower { get; private set; }
     public Vector3 positionOffset;
 
     private void Start()
@@ -22,8 +23,7 @@ public class Node : MonoBehaviour
     private void OnMouseDown()
     {
         if (BuilderManager.Instance.hasNode)
-            return;
-        // instance of the tower prefab
+            BuilderManager.Instance.node.Reset();
         Highlight();
         BuilderManager.Instance.SelectNode(this);
     }

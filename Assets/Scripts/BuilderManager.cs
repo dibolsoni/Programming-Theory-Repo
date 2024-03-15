@@ -6,7 +6,8 @@ using UnityEngine;
 public class BuilderManager : MonoBehaviour
 {
     public static BuilderManager Instance;
-    private Node node;
+    // ENCAPSULATION
+    public Node node { get; private set; }
     public Tower basicTowerPrefab;
     public Tower fireTowerPrefab;
     public Tower coldTowerPrefab;
@@ -35,8 +36,10 @@ public class BuilderManager : MonoBehaviour
 
     public void SelectNode(Node node)
     {
-        BuilderUI.SetActive(true);
+        BuilderUI.SetActive(false);
         this.node = node;
+        if (node.tower == null)
+            BuilderUI.SetActive(true);
     }
 
     public void SetBasicTower()

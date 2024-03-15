@@ -8,11 +8,12 @@ public class Menu : MonoBehaviour
     public GameObject startPanel;
     public GameObject endPanel;
     public TextMeshProUGUI bestScoreText;
+    // ENCAPSULATION
+    private bool isGameOver { get { return GameManager.Instance.isGameOver; } }
 
 
     public void Start()
     {
-        bool isGameOver = GameManager.Instance.isGameOver;
         if (isGameOver)
         {
             GameOver();

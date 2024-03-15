@@ -12,6 +12,7 @@ public class SpawnManager : MonoBehaviour
     public GameObject waveSpawn;
     private List<GameObject> waves;
 
+    // ENCAPSULATION
     public int WaveNumber { get { return waves.Count; }  }
 
     private void Awake()

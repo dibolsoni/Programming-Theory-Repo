@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
 
+[RequireComponent(typeof(LineRenderer))]
 public class Tower : MonoBehaviour
 {
     private Canoon canoon;
@@ -20,12 +19,16 @@ public class Tower : MonoBehaviour
     private float lastFire;
     public float range = 10;
     public float cooldown = 1f;
+    private LineRenderer lineRenderer;
+
 
 
     private void Start()
     {
         canoon = GetComponentInChildren<Canoon>();
         lastFire = Time.time - cooldown;
+        lineRenderer = GetComponent<LineRenderer>();
+        DrawSphereRange();
     }
 
     private void LateUpdate()
@@ -40,7 +43,32 @@ public class Tower : MonoBehaviour
             Fire();
             canoon.Look(target.gameObject);
         }
+        if (isTowerSelected)
+            lineRenderer.enabled = true;
+        else
+            lineRenderer.enabled = false;
 
+    }
+
+    private bool isTowerSelected
+    {
+        get
+        {
+            return BuilderManager.Instance.node != null && BuilderManager.Instance.node.tower == this;
+        }
+    }
+
+    private void DrawSphereRange()
+    {
+        lineRenderer.positionCount = 360;
+        lineRenderer.startWidth = 0.1f;
+        lineRenderer.endWidth = 0.1f;
+        lineRenderer.useWorldSpace = false;
+        for (int i = 0; i < 360; i++)
+        {
+            float rad = i * Mathf.Deg2Rad;
+            lineRenderer.SetPosition(i, new Vector3(Mathf.Sin(rad) * range, 0, Mathf.Cos(rad) * range));
+        }
     }
 
     private void Fire()
