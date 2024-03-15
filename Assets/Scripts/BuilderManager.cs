@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class BuilderManager : MonoBehaviour
 {
     public static BuilderManager Instance;
@@ -13,6 +14,7 @@ public class BuilderManager : MonoBehaviour
     public Tower coldTowerPrefab;
     private Tower towerToBuild;
     public GameObject BuilderUI;
+    public AudioSource buildSound;
 
 
     // ENCAPSULATION
@@ -72,6 +74,7 @@ public class BuilderManager : MonoBehaviour
             return;
         }
         node.BuildTower(towerToBuild);
+        buildSound.Play();
         Close();
     }
 

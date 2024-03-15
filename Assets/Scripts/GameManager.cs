@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public bool isGameOver = false;
     // ENCAPSULATION
     public PlayerManager playerState { get { return PlayerManager.Instance; } }
+    public AudioSource ambienceSound;
 
 
     private void Awake()
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
         isGameOver = false;
         time = timePerWave;
         StartCoroutine(Time());
+        ambienceSound.Play();
     }
 
 
@@ -101,6 +103,7 @@ public class GameManager : MonoBehaviour
     {
         isGameOver = true;
         StopAllCoroutines();
+        ambienceSound.Stop();
         Debug.Log("Game Over");
         PlayerManager.Instance.bestScore = waveNumber;
         SceneManager.LoadScene("Menu");

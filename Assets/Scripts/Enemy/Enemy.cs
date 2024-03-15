@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class Enemy : MonoBehaviour
 {
     public float originalSpeed;
@@ -29,7 +30,12 @@ public class Enemy : MonoBehaviour
     private GameObject ghoul;
     private BurnEffect burnEffect;
     private SlowEffect slowEffect;
+    public AudioClip endPathSound;
+    public AudioClip spawnSound;
+    public AudioClip dieSound;
     public List<Effect> effects;
+    private AudioSource audioSource;
+   
 
 
     private void Awake()
@@ -40,6 +46,8 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        audioSource.PlayOneShot(spawnSound);
         ghoul = transform.GetChild(0).gameObject;
         originalSpeed = speed;
         target = Waypoints.points[waypointIndex];
@@ -99,6 +107,7 @@ public class Enemy : MonoBehaviour
         if ((waypointIndex + 1) >= Waypoints.points.Length)
         {
             GameManager.Instance.removeLife();
+            audioSource.PlayOneShot(endPathSound);
             Destroy(gameObject);
             return;
         }
@@ -111,6 +120,8 @@ public class Enemy : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
+            if (audioSource.isActiveAndEnabled) 
+                audioSource.PlayOneShot(dieSound);
             Destroy(gameObject);
             GameManager.Instance.addGold(goldValue);
         }

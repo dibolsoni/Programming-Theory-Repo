@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
 public class Tower : MonoBehaviour
 {
-    private Canoon canoon;
+    private Cannon canoon;
     public int cost;
 
     private bool isTargetInRange
@@ -25,7 +25,7 @@ public class Tower : MonoBehaviour
 
     private void Start()
     {
-        canoon = GetComponentInChildren<Canoon>();
+        canoon = GetComponentInChildren<Cannon>();
         lastFire = Time.time - cooldown;
         lineRenderer = GetComponent<LineRenderer>();
         DrawSphereRange();
