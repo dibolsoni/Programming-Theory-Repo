@@ -7,7 +7,11 @@ In this game the goal is to survive at most numbers of waves building towers to 
 
 **The license is MIT for the code. Assets has the Unity License. If you plan to use the assets, please check the Unity Licenses for it.**
 
+**Live:** https://play.unity.com/mg/other/builds-es-10 
+
 ![playing](https://github.com/dibolsoni/Programming-Theory-Repo/assets/17862078/0872b4f6-c6b8-4eae-9418-6268bc3d5dff)
+
+https://github.com/dibolsoni/Programming-Theory-Repo/assets/17862078/c000bfce-1111-41b3-b590-2a75ded0b2ab
 
 How to use:
 ```
